@@ -22,6 +22,10 @@ def home(request):
     else:
         return render(request, 'index.html')
     
+def show (request):
+    all = Contact.objects.all()
+    return render(request, 'show.html', {'all': all})
+    
 
 def portfolio(request):
     return render(request, 'portfolio-details.html')
