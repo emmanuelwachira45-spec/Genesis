@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact</title>
+
+    {% load static %}
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+            padding:40px 15px;
+        }
+
+        .card-container{
+            width:100%;
+            max-width:850px;
+            background:rgba(255,255,255,.12);
+            backdrop-filter:blur(20px);
+            border:1px solid rgba(255,255,255,.2);
+            border-radius:25px;
+            padding:40px;
+            color:white;
+            box-shadow:0 15px 40px rgba(0,0,0,.25);
+            animation:fadeIn .8s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(20px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        h1{
+            font-weight:700;
+            text-align:center;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#dbeafe;
+            margin-bottom:35px;
+        }
+
+        label{
+            margin-bottom:8px;
+            font-weight:500;
+        }
+
+        .input-group-text{
+            background:#ffffff;
+            border:none;
+        }
+
+        .form-control{
+            border:none;
+            padding:14px;
+            border-radius:12px;
+            transition:.3s;
+            box-shadow:none;
+        }
+
+        .form-control:focus{
+            border:2px solid #3b82f6;
+            box-shadow:0 0 15px rgba(59,130,246,.35);
+            transform:translateY(-2px);
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        .btn-update{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:linear-gradient(90deg,#2563eb,#3b82f6);
+            color:white;
+            font-weight:600;
+            font-size:17px;
+            transition:.3s;
+        }
+
+        .btn-update:hover{
+            transform:translateY(-3px);
+            box-shadow:0 12px 25px rgba(59,130,246,.4);
+        }
+
+        .back-btn{
+            text-decoration:none;
+            color:white;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin-bottom:20px;
+            transition:.3s;
+        }
+
+        .back-btn:hover{
+            color:#bfdbfe;
+        }
+
+        @media(max-width:768px){
+
+            .card-container{
+                padding:25px;
+            }
+
+            h1{
+                font-size:30px;
+            }
+
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="card-container">
+
+    <a href="javascript:history.back()" class="back-btn">
+        <i class="bi bi-arrow-left"></i> Back
+    </a>
+
+    <h1><i class="bi bi-pencil-square"></i> Edit Contact</h1>
+
+    <p class="subtitle">
+        Update your contact information below.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <label>Your Name</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person"></i>
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        value="{{ editappointment.name }}"
+                        placeholder="Enter your name"
+                        required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label>Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        value="{{ editappointment.email }}"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label>Subject</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-chat-left-text"></i>
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="subject"
+                        value="{{ editappointment.subject }}"
+                        placeholder="Enter subject"
+                        required>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label>Message</label>
+                <textarea
+                    class="form-control"
+                    name="message"
+                    rows="7"
+                    placeholder="Write your message..."
+                    required>{{ editappointment.message }}</textarea>
+            </div>
+
+            <div class="col-12 mt-3">
+                <button class="btn-update">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Update Contact
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
